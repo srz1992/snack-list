@@ -3,9 +3,32 @@ import logo from './logo.svg';
 import './App.css';
 import {connect} from 'react-redux'
 
+const mapReduxStateToProps = (reduxStore)=>{
+  reduxStore
+}
 
 
 class App extends Component {
+
+constructor(props){
+  super(props)
+  this.state = {
+    snack: ''
+  }
+}
+
+addSnack = ()=>{
+  const action = {type: 'ADD_SNACK', payload: this.state.snack}
+  this.props.dispatch(action);
+}
+
+handleSnackChange = (event)=>{
+  this.setState({
+    snack: event.target.value
+  })
+}
+
+
   render() {
     return (
       <div className="App">
@@ -14,11 +37,13 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+        Snacks
         </p>
+        <input type="text" onChange={this.handleSnackChange} value={this.state.snack}/>
+        <button onClick={this.addSnack}>Add Snack</button>
       </div>
     );
   }
 }
 
-export default App;
+export default connect(mapReduxStateToProps)(App);

@@ -8,7 +8,14 @@ import {Provider} from 'react-redux'
 import logger from 'redux-logger'
 
 const snackReducer = (state=[], action) =>{
-    return{}
+    
+    if(action.type === 'ADD_SNACK'){
+        console.log('adding payload of:', action.payload, 'to snack list');
+        
+        return [...state, action.payload]
+    }
+    
+    return state;
 }
 
 
